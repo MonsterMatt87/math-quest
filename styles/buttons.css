@@ -1,37 +1,55 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/buttons.css
-  Role: Button styles, primary/secondary variants, danger buttons, and hover states.
+  Role: Styles for all button types: primary, secondary, small, and danger variants.
+        Also defines hover/active transitions and theme-toggle icon animations.
 */
 
+/* ============================================================
+   BASE BUTTON STYLE
+   Shared by all button variants unless overridden.
+   ============================================================ */
 button {
   border: none;
   cursor: pointer;
   font-size: 14px;
   padding: 9px 16px;
-  border-radius: 999px;
+  border-radius: 999px; /* Pill shape */
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--accent);
-  color: #0b1220;
+  background: var(--accent); /* Primary colour */
+  color: #0b1220; /* Dark text for contrast */
   font-weight: 600;
   letter-spacing: 0.02em;
+
+  /* Soft glowing shadow used across CTAs */
   box-shadow: 0 14px 28px rgba(56, 189, 248, 0.45);
+
   transform: translateY(0);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease, opacity 0.15s ease;
+  transition: 
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.15s ease,
+    opacity 0.15s ease;
 }
 
+/* Lift-on-hover effect */
 button:hover {
   transform: translateY(-1px);
   box-shadow: 0 18px 36px rgba(56, 189, 248, 0.55);
 }
 
+/* Pressed/active state */
 button:active {
   transform: translateY(0);
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.8);
 }
 
+/* ============================================================
+   SECONDARY BUTTONS
+   Used for non-primary actions (menu, replay, etc.)
+   ============================================================ */
 button.secondary {
   background: rgba(15, 23, 42, 0.95);
   color: var(--text-soft);
@@ -41,14 +59,21 @@ button.secondary {
 
 button.secondary:hover {
   background: rgba(15, 23, 42, 0.9);
-  border-color: var(--accent);
+  border-color: var(--accent); /* Subtle interactive feel */
 }
 
+/* Small variant for compact areas */
 button.small {
   font-size: 12px;
   padding: 6px 10px;
 }
 
+/* ============================================================
+   DANGER BUTTONS
+   Used in the "Danger Zone" (reset progress, remove players, etc.)
+   ============================================================ */
+
+/* Soft danger: outlined warning */
 button.danger-soft {
   border-color: rgba(248, 113, 113, 0.7);
   color: var(--danger);
@@ -60,6 +85,7 @@ button.danger-soft:hover {
   color: #fecaca;
 }
 
+/* Hard danger: stronger destructive styling */
 button.danger-hard {
   border-color: rgba(248, 113, 113, 0.9);
   background: rgba(127, 29, 29, 0.5);
@@ -72,17 +98,25 @@ button.danger-hard:hover {
   color: #fff7ed;
 }
 
+/* ============================================================
+   PRIMARY CTA PULSE ANIMATION
+   Used by Start button to draw attention.
+   ============================================================ */
 .pulse-primary {
   animation: pulsePrimary 1.6s ease-in-out infinite;
 }
 
-/* Theme icon transitions */
+/* ============================================================
+   THEME TOGGLE BUTTON
+   UI for switching light/dark modes
+   ============================================================ */
 .theme-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Animated icon rotation when toggling */
 .theme-icon {
   font-size: 18px;
   transition: transform 0.35s ease, opacity 0.35s ease;
