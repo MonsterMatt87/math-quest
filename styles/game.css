@@ -1,10 +1,14 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/game.css
-  Role: Game screen styling – question card, options grid, timer, streak, and bottom bar.
+  Role: Game screen styling – question card, options grid,
+        timer, streak, progress bar, and bottom bar.
 */
 
-/* Game header */
+/* ============================================================
+   GAME HEADER (top of the game screen)
+   Shows level badge + question count + progress bar.
+   ============================================================ */
 .game-header {
   display: flex;
   align-items: center;
@@ -12,23 +16,27 @@
   margin-bottom: 18px;
 }
 
+/* Level badge (e.g. “🌟 Level 1 · Warm-up”) */
 .badge {
   display: inline-block;
   padding: 6px 12px;
-  background: rgba(56,189,248,0.12);
-  border-radius: 999px;
+  background: rgba(56,189,248,0.12); /* Soft accent tint */
+  border-radius: 999px;              /* Pill badge */
   font-size: 13px;
   color: var(--accent);
   font-weight: 600;
 }
 
+/* Under-badge text showing question count (“3 of 10”) */
 .game-meta {
   font-size: 13px;
   color: var(--text-soft);
   margin-top: 4px;
 }
 
-/* Progress bar */
+/* ============================================================
+   PROGRESS BAR (horizontal)
+   ============================================================ */
 .progress-outer {
   width: 160px;
   height: 8px;
@@ -37,14 +45,18 @@
   overflow: hidden;
 }
 
+/* The animated fill inside the bar */
 .progress-inner {
   height: 100%;
   background: var(--accent);
-  width: 0%;
+  width: 0%;                          /* Progress set via JS */
   transition: width 0.25s ease-out;
 }
 
-/* Question Card */
+/* ============================================================
+   QUESTION CARD
+   Main interactive container holding question, options, timer.
+   ============================================================ */
 .question-card {
   background: var(--card);
   border: 1px solid rgba(148,163,184,0.25);
@@ -52,15 +64,20 @@
   padding: 22px 20px;
   box-shadow: var(--shadow-soft);
 
-  /* Override global transition: NO transform here */
-  transition: background 0.35s ease, color 0.35s ease,
-              border-color 0.35s ease, box-shadow 0.35s ease;
+  /* Avoid scaling/transform side-effects with animations */
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
+/* When loading a new question (subtle pop animation) */
 .question-card.bump {
   animation: bump 0.25s ease-out;
 }
 
+/* Main math question text */
 .question-text {
   font-size: 26px;
   text-align: center;
@@ -68,6 +85,7 @@
   font-weight: 600;
 }
 
+/* “Tap the correct answer:” */
 .question-sub {
   font-size: 14px;
   text-align: center;
@@ -75,7 +93,10 @@
   margin-bottom: 18px;
 }
 
-/* Options Grid */
+/* ============================================================
+   OPTIONS GRID
+   2×2 answer button layout.
+   ============================================================ */
 .options-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
@@ -83,11 +104,13 @@
   margin-bottom: 18px;
 }
 
+/* Each answer button */
 .option-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   padding: 14px 10px;
   background: rgba(148,163,184,0.12);
   border: 1px solid rgba(148,163,184,0.25);
@@ -97,38 +120,46 @@
   transition: all 0.15s ease-out;
 }
 
+/* Lift on hover */
 .option-btn:hover {
   transform: translateY(-2px);
 }
 
+/* Correct answer state */
 .option-btn.correct {
   background: rgba(74,222,128,0.15);
   border-color: var(--success);
 }
 
+/* Incorrect answer state */
 .option-btn.wrong {
   background: rgba(239,68,68,0.15);
   border-color: var(--danger);
 }
 
+/* “A / B / C / D” label */
 .option-label {
   font-size: 13px;
   color: var(--text-soft);
   margin-bottom: 3px;
 }
 
-/* Feedback */
+/* ============================================================
+   FEEDBACK TEXT (Correct / Incorrect)
+   ============================================================ */
 .feedback {
   text-align: center;
   font-size: 15px;
-  min-height: 22px;
+  min-height: 22px; /* Prevent layout jump */
   margin-bottom: 12px;
 }
 
 .feedback.good { color: var(--success); }
-.feedback.bad { color: var(--danger); }
+.feedback.bad  { color: var(--danger); }
 
-/* Bottom bar */
+/* ============================================================
+   BOTTOM BAR (Timer, streak, back button)
+   ============================================================ */
 .bottom-bar {
   display: flex;
   align-items: center;
@@ -138,23 +169,28 @@
   color: var(--text-soft);
 }
 
+/* Timer label text (default color) */
 #timerLabel {
   font-weight: 600;
   color: var(--accent-strong);
   transition: color 0.2s ease-out, transform 0.2s ease-out;
 }
 
+/* Timer turns red and pulses when warning class added */
 #timerLabel.timer-warning {
   color: #ef4444 !important;
 }
 
+/* Current streak counter */
 #streakLabel {
   font-weight: 600;
 }
 
-/* Animations */
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 @keyframes bump {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.03); }
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.03); }
   100% { transform: scale(1); }
 }
