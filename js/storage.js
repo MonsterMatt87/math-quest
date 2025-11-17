@@ -1,3 +1,8 @@
+// Math Quest – Mental Math Trainer
+// File: js/storage.js
+// Role: Persistence layer. Handles saving and loading player profiles, progress,
+//       stars, and leaderboard data from localStorage.
+
 "use strict";
 
 // --- Game configuration ---
