@@ -1,41 +1,63 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/layout.css
-  Role: Page layout, shell, header, main content structure, and responsive behavior.
+  Role: Page layout, shell container, header area, grid structure,
+        brand elements, and responsive adjustments.
 */
 
-/* --- Layout & shell (extracted) --- */
+/* ============================================================
+   ROOT PAGE LAYOUT
+   Centers entire app with a subtle radial background.
+   ============================================================ */
 body {
   margin: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Dark theme default background */
   background: radial-gradient(circle at top, #1e293b, #020617 55%);
   color: var(--text-main);
 }
 
+/* Main app container – controls width & padding */
 .app {
   width: 100%;
   max-width: 1180px;
   padding: 20px;
 }
 
+/* ============================================================
+   SHELL + INNER WRAPPER
+   Provides glowing border effect and inner card-like appearance.
+   ============================================================ */
 .shell {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(129, 140, 248, 0.2));
-  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.15),
+    rgba(129, 140, 248, 0.2)
+  );
+  padding: 2px;                    /* Thin gradient frame */
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
 }
 
 .inner {
-  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), var(--card));
+  background: radial-gradient(
+    circle at top left,
+    rgba(56, 189, 248, 0.08),
+    var(--card)
+  );
   border-radius: 22px;
   padding: 24px 20px 20px;
   position: relative;
   overflow: hidden;
 }
 
+/* ============================================================
+   HEADER (logo, player pill, theme button)
+   ============================================================ */
 header {
   display: flex;
   align-items: center;
@@ -44,12 +66,14 @@ header {
   margin-bottom: 16px;
 }
 
+/* Brand block: logo + text */
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* Floating circular logo with subtle glow */
 .brand-logo {
   width: 40px;
   height: 40px;
@@ -59,10 +83,15 @@ header {
   align-items: center;
   justify-content: center;
   font-size: 22px;
+
+  /* Glowing highlight */
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+
+  /* Gentle up/down float animation */
   animation: floatLogo 3s ease-in-out infinite;
 }
 
+/* Primary title: “Math Quest” */
 .brand-text h1 {
   font-size: 20px;
   margin: 0;
@@ -70,12 +99,14 @@ header {
   text-transform: uppercase;
 }
 
+/* Subtitle under main title */
 .brand-text p {
   margin: 0;
   font-size: 12px;
   color: var(--text-soft);
 }
 
+/* Player pill showing current profile */
 .player-pill {
   font-size: 13px;
   padding: 8px 12px;
@@ -88,6 +119,7 @@ header {
   color: var(--text-soft);
 }
 
+/* Player name highlighted */
 .player-pill span {
   color: var(--accent);
   font-weight: 600;
@@ -97,6 +129,10 @@ main {
   margin-top: 8px;
 }
 
+/* ============================================================
+   SCREEN SYSTEM (Start / Game / Summary)
+   Each screen fades in and out when active.
+   ============================================================ */
 .screen {
   display: none;
   animation: fadeIn 0.25s ease-out;
@@ -106,6 +142,7 @@ main {
   display: block;
 }
 
+/* Simple fade-slide animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -117,16 +154,21 @@ main {
   }
 }
 
+/* ============================================================
+   PILL TAG ("Designed for adults")
+   ============================================================ */
 .pill-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
   font-size: 11px;
+
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(148, 163, 184, 0.4);
   margin-bottom: 10px;
+
   color: var(--text-soft);
 }
 
@@ -134,19 +176,26 @@ main {
   font-size: 13px;
 }
 
+/* ============================================================
+   START SCREEN LAYOUT (Two-card grid)
+   ============================================================ */
 .start-layout {
   display: grid;
   grid-template-columns: minmax(0, 2.2fr) minmax(0, 3fr);
   gap: 18px;
 }
 
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   (Single-column layout for mobile)
+   ============================================================ */
 @media (max-width: 768px) {
   .start-layout {
     grid-template-columns: minmax(0, 1fr);
   }
+
   header {
     flex-direction: column;
     align-items: flex-start;
   }
 }
-
