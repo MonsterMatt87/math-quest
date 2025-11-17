@@ -1,16 +1,21 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/leaderboard.css
-  Role: Leaderboard layout, recent players list, and ranking visuals (medals, etc.).
+  Role: Leaderboard layout, recent players list, ranking visuals, and medal animations.
 */
 
-/* --- Leaderboard --- */
+/* ============================================================
+   LEADERBOARD CONTAINER + TITLE
+   ============================================================ */
+
+/* Wrapper block for leaderboard (header + list) */
 .leaderboard {
   margin-top: 10px;
   font-size: 11px;
   color: var(--text-soft);
 }
 
+/* Section title: "Leaderboard (total stars)" */
 .leaderboard-title {
   font-weight: 600;
   font-size: 12px;
@@ -20,21 +25,34 @@
   gap: 6px;
 }
 
+/* ============================================================
+   LEADERBOARD LIST BOX
+   Scrollable list of ranking rows.
+   ============================================================ */
 .leaderboard-list {
   border-radius: 12px;
   border: 1px solid rgba(148, 163, 184, 0.4);
   background: rgba(15, 23, 42, 0.9);
   padding: 6px 8px;
+
+  /* Prevent layout expansion on long lists */
   max-height: 300px;
   overflow-y: auto;
 }
 
+/* ============================================================
+   LEADERBOARD ROWS
+   Each row shows rank, name, and score.
+   ============================================================ */
 .leaderboard-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 4px 2px;
   font-size: 11px;
+
+  /* Soft divider line between entries */
   border-bottom: 1px solid rgba(30, 41, 59, 0.7);
 }
 
@@ -42,35 +60,54 @@
   border-bottom: none;
 }
 
+/* Top 3 highlighted with a subtle gold/blue gradient */
 .leaderboard-row.top3 {
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.15), rgba(56, 189, 248, 0.08));
+  background: linear-gradient(
+    90deg,
+    rgba(251, 191, 36, 0.15),
+    rgba(56, 189, 248, 0.08)
+  );
   border-radius: 8px;
 }
 
+/* ============================================================
+   NAME + RANK BLOCK
+   ============================================================ */
 .leaderboard-name {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
+/* Rank number (1, 2, 3...) */
 .leaderboard-rank {
   width: 18px;
   text-align: center;
   font-weight: 600;
 }
 
+/* ============================================================
+   SCORE
+   ============================================================ */
 .leaderboard-score {
   font-weight: 600;
   color: var(--accent-strong);
 }
 
+/* ============================================================
+   MEDALS (🥇 🥈 🥉)
+   Animated pop-in effect
+   ============================================================ */
 .leaderboard-medal {
   display: inline-block;
   font-size: 14px;
   margin-right: 2px;
+
+  /* Small pop animation for fun visual feedback */
   animation: medalPop 0.8s ease-out;
 }
 
+/* Subtle glow variations for medal types */
 .leaderboard-medal.gold {
   text-shadow: 0 0 6px rgba(250, 204, 21, 0.8);
 }
