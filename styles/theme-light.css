@@ -1,3 +1,9 @@
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/theme-light.css
+  Role: Light theme overrides – background, text, cards, and controls in light mode.
+*/
+
 body.light {
   background: radial-gradient(circle at top, #e2e8f0, #ffffff 55%);
   color: var(--text-main);
