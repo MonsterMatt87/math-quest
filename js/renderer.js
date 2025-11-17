@@ -5,7 +5,9 @@
 
 "use strict";
 
-// --- Rendering / UI functions ---
+// ============================================================
+//  📊 XP BAR – Overall progress visualisation
+// ============================================================
 
 function updateXPBar() {
   const totalPossibleStars = LEVELS.length * 3;
@@ -14,20 +16,28 @@ function updateXPBar() {
       ? 0
       : state.progress.totalStars / totalPossibleStars;
   const pct = Math.min(100, Math.round(fraction * 100));
+
   xpBar.style.width = pct + "%";
   xpLabel.textContent = `${state.progress.totalStars} star${
     state.progress.totalStars === 1 ? "" : "s"
   } collected`;
 }
 
+
+// ============================================================
+//  🎯 LEVEL GRID – Levels overview & tap-to-play tiles
+// ============================================================
+
 function renderLevelGrid() {
   levelGrid.innerHTML = "";
+
   LEVELS.forEach((level) => {
     const unlocked = state.progress.highestLevelUnlocked >= level.id;
     const stars = state.progress.starsByLevel[level.id] || 0;
 
     const tile = document.createElement("div");
     tile.className = "level-tile" + (unlocked ? "" : " locked");
+
     tile.innerHTML = `
       <div class="level-title">
         <span>${level.emoji}</span>
@@ -53,6 +63,7 @@ function renderLevelGrid() {
       </div>
     `;
 
+    // Only attach click handler if level is unlocked
     if (unlocked) {
       tile.style.cursor = "pointer";
       tile.addEventListener("click", () => {
@@ -63,6 +74,11 @@ function renderLevelGrid() {
     levelGrid.appendChild(tile);
   });
 }
+
+
+// ============================================================
+//  🏆 LEADERBOARD – Top players by total stars
+// ============================================================
 
 function renderLeaderboard() {
   if (!leaderboardList || !leaderboardEl) return;
@@ -86,10 +102,11 @@ function renderLeaderboard() {
     const namePart = document.createElement("div");
     namePart.className = "leaderboard-name";
 
-    // Medal for top 3
+    // Medal for top 3 positions
     if (index === 0 || index === 1 || index === 2) {
       const medalSpan = document.createElement("span");
       medalSpan.className = "leaderboard-medal";
+
       if (index === 0) {
         medalSpan.classList.add("gold");
         medalSpan.textContent = "🥇";
@@ -100,6 +117,7 @@ function renderLeaderboard() {
         medalSpan.classList.add("bronze");
         medalSpan.textContent = "🥉";
       }
+
       namePart.appendChild(medalSpan);
     }
 
@@ -124,6 +142,11 @@ function renderLeaderboard() {
   });
 }
 
+
+// ============================================================
+//  👤 RECENT PLAYERS – Quick profile switching
+// ============================================================
+
 function renderRecentPlayers() {
   if (!recentPlayersList || !recentPlayersEl) return;
 
@@ -139,14 +162,18 @@ function renderRecentPlayers() {
   profiles.forEach((p) => {
     const btn = document.createElement("button");
     btn.className = "secondary small recent-player-btn";
+
+    // Highlight currently active player
     if (p.name === state.playerName) {
       btn.classList.add("active");
     }
+
     btn.textContent = p.name;
 
     btn.addEventListener("click", () => {
       state.playerName = p.name;
       state.progress = p.progress;
+
       playerPillName.textContent = state.playerName;
       if (playerNameInput) {
         playerNameInput.value = state.playerName;
@@ -162,10 +189,18 @@ function renderRecentPlayers() {
   });
 }
 
+
+// ============================================================
+//  📺 SCREEN SWITCHING – Start / Game / Summary
+// ============================================================
+
 function switchScreen(screenId) {
   [startScreen, gameScreen, summaryScreen].forEach((el) =>
     el.classList.remove("active")
   );
+
   const target = document.getElementById(screenId);
-  if (target) target.classList.add("active");
+  if (target) {
+    target.classList.add("active");
+  }
 }
