@@ -1,47 +1,74 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/theme-dark.css
-  Role: Dark theme overrides – background, text, cards, and controls in dark mode.
+  Role: Dark theme overrides – applies enhanced contrast, lighting,
+        and clarity adjustments for dark mode visual comfort.
 */
 
+/* ============================================================
+   GLOBAL DARK BACKGROUND & TEXT
+   ============================================================ */
+
+/* Main dark gradient background + default text color */
 body {
   background: radial-gradient(circle at 20% 12%, #1e293b, #020617 70%);
   color: var(--text-main);
 }
 
-/* Improve contrast of question text in dark mode */
+/* ============================================================
+   GAME QUESTION VISIBILITY
+   Higher contrast for text inside the question card.
+   ============================================================ */
+
+/* Question prompt text */
 body .question-text,
 body .question-sub {
-  color: #f8fafc; /* near-white for high contrast */
+  color: #f8fafc; /* near-white for crisp readability */
 }
 
-/* Improve contrast of option buttons */
+/* ============================================================
+   OPTION BUTTON CONTRAST
+   Ensures answer buttons are easy to read and distinguish.
+   ============================================================ */
+
 body .option-btn {
-  color: #f1f5f9;
-  border-color: rgba(255,255,255,0.18);
+  color: #f1f5f9; /* soft-white text */
+  border-color: rgba(255,255,255,0.18); /* subtle outline to lift buttons */
 }
 
+/* Option letter label (A, B, C, D) */
 body .option-label {
   color: #cbd5e1;
 }
 
-/* Improve readability inside question card */
+/* ============================================================
+   QUESTION CARD CLARITY
+   ============================================================ */
+
+/* Ensures all text inside the card is bright enough in dark mode */
 body .question-card {
   color: #f8fafc;
 }
 
-/* Bottom bar labels */
+/* ============================================================
+   BOTTOM BAR (Timer + Streak)
+   ============================================================ */
+
 body .bottom-bar,
 body #timerLabel,
 body #streakLabel {
-  color: #e2e8f0;
+  color: #e2e8f0; /* slight soft-white tone */
 }
 
-/* Enhanced dark-mode surfaces */
+/* ============================================================
+   SURFACE REFINEMENT (Cards, Tiles, Leaderboard)
+   Enhanced depth & shadowing specifically for dark theme.
+   ============================================================ */
+
 body .card,
 body .question-card,
 body .level-tile,
 body .leaderboard {
   background: linear-gradient(145deg, #0f172a, #1e293b);
-  box-shadow: 0 6px 22px rgba(0,0,0,0.55);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.55); /* deeper shadow for dark mode */
 }
