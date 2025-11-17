@@ -10,7 +10,8 @@
   <meta charset="UTF-8" />
   <title>Math Quest – Mental Math Trainer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Modular CSS structure -->
+
+  <!-- Modular CSS structure: base → layout → components → themes -->
   <link rel="stylesheet" href="styles/base.css" />
   <link rel="stylesheet" href="styles/layout.css" />
   <link rel="stylesheet" href="styles/cards.css" />
@@ -28,8 +29,12 @@
   <div class="app">
     <div class="shell">
       <div class="inner">
- 
-
+        <!--
+          HEADER
+          - Branding (logo + title)
+          - Current player pill
+          - Theme toggle (dark/light)
+        -->
         <header>
           <div class="brand">
             <div class="brand-logo">➗</div>
@@ -47,15 +52,25 @@
         </header>
 
         <main>
-          <!-- Start Screen -->
+          <!--
+            START SCREEN
+            - Left card: sign-in, danger zone, recent players, leaderboard
+            - Right card: feature overview, XP bar, levels preview
+          -->
           <section class="screen active" id="startScreen">
             <div class="pill-tag">
               <span>🧠</span> Designed for adults
             </div>
+
             <div class="start-layout">
+              <!--
+                LEFT CARD: player sign-in, danger actions, recent players, leaderboard
+              -->
               <div class="card">
                 <h2>Sign in to your math session</h2>
                 <p>Short, focused mental math rounds designed as a quick brain workout.</p>
+
+                <!-- Player name input -->
                 <label for="playerName">Player name</label>
                 <input
                   type="text"
@@ -63,6 +78,8 @@
                   maxlength="12"
                   placeholder="e.g. Alex, Taylor"
                 />
+
+                <!-- Primary start CTA -->
                 <div class="btn-row">
                   <button id="startBtn" class="pulse-primary">
                     Start Adventure
@@ -70,6 +87,11 @@
                   </button>
                 </div>
 
+                <!--
+                  Danger zone:
+                  - Reset progress for current player
+                  - Remove all stored players (but keep leaderboard)
+                -->
                 <div class="danger-row">
                   <div class="danger-label">Danger zone</div>
 
@@ -84,21 +106,27 @@
                   </button>
                 </div>
 
+                <!-- Recent players pill row (last 3 profiles on this device) -->
                 <div id="recentPlayers" class="recent-players" style="display:none; margin-top:10px;">
                   <div class="recent-title">Recent players:</div>
                   <div class="recent-list" id="recentPlayersList"></div>
                 </div>
 
+                <!-- Leaderboard showing top players by total stars -->
                 <div class="leaderboard" id="leaderboard" style="margin-top:12px; display:none;">
                   <div class="leaderboard-title">Leaderboard (total stars)</div>
                   <div class="leaderboard-list" id="leaderboardList"></div>
                 </div>
 
+                <!-- Hint when progress is found in localStorage -->
                 <div class="xp-caption" id="resumeHint" style="margin-top:10px; display:none;">
                   Progress found on this device — we’ll keep your stars.
                 </div>
               </div>
 
+              <!--
+                RIGHT CARD: game overview + XP bar + level tiles preview
+              -->
               <div class="card">
                 <h2>What’s inside? ✨</h2>
                 <ul class="feature-list">
@@ -107,6 +135,8 @@
                   <li><span class="feature-icon">📈</span> Progress bar to track total stars</li>
                   <li><span class="feature-icon">🔒</span> Unlock tougher sets as you improve</li>
                 </ul>
+
+                <!-- Overall XP bar (total stars vs max possible) -->
                 <div class="xp-bar-wrap" style="margin-top:14px;">
                   <div class="xp-bar" id="xpBar"></div>
                 </div>
@@ -115,6 +145,7 @@
                   <span id="xpLabel">0 stars collected</span>
                 </div>
 
+                <!-- Level tiles; populated dynamically from LEVELS config -->
                 <div class="levels-grid" id="levelGrid">
                   <!-- Levels preview will be injected here -->
                 </div>
@@ -122,15 +153,19 @@
             </div>
           </section>
 
-          <!-- Game Screen -->
+          <!--
+            GAME SCREEN
+            - Shows current level, question count, timer, streak, and options
+          -->
           <section class="screen" id="gameScreen">
+            <!-- Header: level badge + question progress bar -->
             <div class="game-header">
               <div>
                 <div class="badge" id="levelBadge">
                   🌟 Level 1 · Warm-up
                 </div>
                 <div class="game-meta" id="gameMeta">
-                  <!-- e.g. 3 / 8 questions -->
+                  <!-- e.g. Question 3 of 10 -->
                 </div>
               </div>
               <div class="progress-outer">
@@ -138,13 +173,20 @@
               </div>
             </div>
 
+            <!-- Question card: main gameplay area -->
             <div class="question-card" id="questionCard">
               <div class="question-text" id="questionText">5 + 3 = ?</div>
               <div class="question-sub" id="questionSub">Tap the correct answer:</div>
+
+              <!-- Multiple-choice options get injected here -->
               <div class="options-grid" id="optionsGrid">
                 <!-- options here -->
               </div>
+
+              <!-- Inline feedback for the current question -->
               <div class="feedback" id="feedback"></div>
+
+              <!-- Bottom bar: timer, streak, and back button -->
               <div class="bottom-bar">
                 <span id="timerLabel">⏱ 10s</span>
                 <span id="streakLabel">🔥 Streak: 0</span>
@@ -153,16 +195,26 @@
             </div>
           </section>
 
-          <!-- Summary Screen -->
+          <!--
+            SUMMARY SCREEN
+            - Shown at the end of each level
+            - Displays stars, stats, and navigation actions
+          -->
           <section class="screen" id="summaryScreen">
             <div class="card summary-card">
+              <!-- Particle confetti layer (for 3-star wins) -->
               <div id="confettiContainer" class="confetti-container"></div>
+
+              <!-- Title + descriptive summary -->
               <h2 id="summaryTitle">Level complete! 🎉</h2>
               <p id="summarySubtitle">Nice work. Here’s how you did:</p>
+
+              <!-- Stars earned for this level -->
               <div class="summary-stars" id="summaryStars">
                 <!-- stars inserted -->
               </div>
 
+              <!-- Stat grid: accuracy, questions, best streak, total stars -->
               <div class="summary-grid">
                 <div class="stat-chip">
                   <strong id="summaryAccuracy">100% correct</strong>
@@ -182,6 +234,7 @@
                 </div>
               </div>
 
+              <!-- Summary actions: next level, replay, back to menu -->
               <div class="btn-row" style="margin-top:14px;">
                 <button id="nextLevelBtn">
                   Next Level
@@ -201,10 +254,18 @@
     </div>
   </div>
 
-<script src="js/storage.js"></script>
-<script src="js/helpers.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/engine.js"></script>
-<script src="js/events.js"></script>
+  <!--
+    SCRIPT LOADING ORDER
+    - storage.js: global config, LEVELS, state, localStorage helpers
+    - helpers.js: utilities (random, feedback, confetti, etc.)
+    - renderer.js: DOM rendering for grids, leaderboard, screens
+    - engine.js: core game logic (questions, scoring, timers)
+    - events.js: DOM event wiring and theme toggle
+  -->
+  <script src="js/storage.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/events.js"></script>
 </body>
 </html>
