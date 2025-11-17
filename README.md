@@ -16,6 +16,7 @@ https://MonsterMatt87.github.io/math-quest/
 🎮 Features
 
 ⭐ Gameplay
+
 	•	10 levels with increasing difficulty
 	•	Multiple-choice questions
 	•	Timed questions with visual countdown
@@ -25,6 +26,7 @@ https://MonsterMatt87.github.io/math-quest/
 	•	Summary screen with animated particle confetti
 
 👤 Player System
+
 	•	Create named players
 	•	Automatic progress saving
 	•	Switch between last 3 players
@@ -32,12 +34,14 @@ https://MonsterMatt87.github.io/math-quest/
 	•	“Danger zone” UI for reset actions
 
 🎨 Visual polish
+
 	•	Smooth animations
 	•	Level-up transitions
 	•	Confetti particle effects
 	•	Card shake on timeout
 	•	Light/dark theme toggle
 	•	Professional UI designed for adults
+	
 
 🗂️ Project Structure
 
@@ -83,6 +87,7 @@ That’s it!
 ⸻
 
 🌐 Hosting via GitHub Pages
+
 	1.	Go to your repository
 	2.	Settings → Pages
 	3.	Source: Deploy from a branch
@@ -95,6 +100,7 @@ Your game is now online!
 ⸻
 
 🛠️ Technologies Used
+
 	•	HTML5
 	•	CSS3 (modular stylesheets, animations, themes)
 	•	Vanilla JavaScript (no frameworks)
