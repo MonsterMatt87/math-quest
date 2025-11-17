@@ -1,3 +1,8 @@
+// Math Quest – Mental Math Trainer
+// File: js/helpers.js
+// Role: Small utility functions used across the app (formatting, UI helpers,
+//       confetti trigger, highlighting correct options, etc.).
+
 "use strict";
 
 // --- Helper functions ---
