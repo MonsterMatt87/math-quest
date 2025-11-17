@@ -1,5 +1,8 @@
-
-
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/levels.css
+  Role: Level grid, level tiles, lock states, and level-specific visual cues.
+*/
 
 /* --- Level grid & tiles --- */
 .levels-grid {
