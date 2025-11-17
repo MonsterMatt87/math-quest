@@ -1,3 +1,8 @@
+// Math Quest – Mental Math Trainer
+// File: js/engine.js
+// Role: Core game engine. Manages question generation, timing, streaks, scoring,
+//       level progression, and summary calculations.
+
 "use strict";
 
 // --- Core game engine ---
