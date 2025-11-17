@@ -1,43 +1,67 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/base.css
-  Role: Global resets, typography, colors, and shared base styles.
+  Role: Global resets, color variables, themes, typography, and shared base styles.
 */
 
-/* --- Base & variables (extracted) --- */
+/* ============================================================
+   ROOT VARIABLES — DARK THEME (DEFAULT)
+   These define the global colour palette and tokens used throughout
+   the entire UI. All components inherit from here.
+   ============================================================ */
 :root {
+  /* System font stack for crisp, cross-platform readability */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --bg: #0f172a;
-  --card: #020617;
-  --accent: #38bdf8;
-  --accent-soft: rgba(56, 189, 248, 0.2);
-  --accent-strong: #fbbf24;
-  --text-main: #e5e7eb;
-  --text-soft: #9ca3af;
-  --danger: #f97373;
-  --success: #4ade80;
-  --radius-lg: 18px;
-  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6);
+
+  /* Core theme colours */
+  --bg: #0f172a;           /* App background */
+  --card: #020617;         /* Card surfaces */
+  --accent: #38bdf8;       /* Highlight + primary CTA */
+  --accent-soft: rgba(56, 189, 248, 0.2);  /* Subtle glow layers */
+  --accent-strong: #fbbf24; /* Strong accent (timer urgency) */
+
+  /* Text colours */
+  --text-main: #e5e7eb;    /* Primary text colour */
+  --text-soft: #9ca3af;    /* Secondary/descriptive text */
+
+  /* Status colours */
+  --danger: #f97373;       /* Wrong answer colour */
+  --success: #4ade80;      /* Correct answer colour */
+
+  /* Layout tokens */
+  --radius-lg: 18px;       /* Rounded corners across UI */
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6); /* Soft elevated shadow */
 }
 
-/* Light Theme Variables */
+/* ============================================================
+   LIGHT THEME OVERRIDES
+   Activated when <body class="light"> is applied.
+   Only redefines variables — structure remains unchanged.
+   ============================================================ */
 :root.light {
   --bg: #f3f4f6;
   --card: #ffffff;
   --accent: #0ea5e9;
   --accent-soft: rgba(14,165,233,0.18);
   --accent-strong: #ea580c;
+
   --text-main: #1e293b;
   --text-soft: #475569;
+
   --danger: #dc2626;
   --success: #16a34a;
 }
+
+/* Light mode background gradient for subtle depth */
 body.light {
   background: radial-gradient(circle at top, #e2e8f0, #ffffff 55%);
   color: var(--text-main);
 }
 
+/* ============================================================
+   GLOBAL RESET
+   Normalises box layout model across all elements.
+   ============================================================ */
 * {
   box-sizing: border-box;
 }
-
