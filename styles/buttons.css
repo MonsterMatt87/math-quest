@@ -1,3 +1,9 @@
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/buttons.css
+  Role: Button styles, primary/secondary variants, danger buttons, and hover states.
+*/
+
 button {
   border: none;
   cursor: pointer;
