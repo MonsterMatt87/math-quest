@@ -1,21 +1,22 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/animations.css
-  Role: Keyframe animations (shake, bump, fade, confetti, etc.) and animation helper classes.
+  Role: Keyframe animations (shake, bump, fade, timer warnings, confetti, etc.)
+        + helper animation classes used throughout the UI.
 */
 
+/* ============================================================
+   GENERAL UI ANIMATIONS
+   ============================================================ */
+
+/* Floating logo animation on start screen */
 @keyframes floatLogo {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
 }
 
+/* Gentle pulsing used on the Start button (pulse-primary class) */
 @keyframes pulsePrimary {
   0% {
     transform: translateY(0) scale(1);
@@ -31,14 +32,19 @@
   }
 }
 
-/* --- Timer Warning Animations --- */
+/* ============================================================
+   TIMER WARNING ANIMATIONS
+   These trigger when the timer is below 3 seconds.
+   ============================================================ */
 
+/* Pulse + colour flash when time is low */
 @keyframes timerPulseRed {
-  0% { color: var(--accent-strong); transform: scale(1); }
-  50% { color: #ef4444; transform: scale(1.2); }
+  0%   { color: var(--accent-strong); transform: scale(1); }
+  50%  { color: #ef4444; transform: scale(1.2); }
   100% { color: var(--accent-strong); transform: scale(1); }
 }
 
+/* Mild shake horizontally during warning state */
 @keyframes timerShake {
   0% { transform: translateX(0); }
   20% { transform: translateX(-3px); }
@@ -48,12 +54,13 @@
   100% { transform: translateX(0); }
 }
 
+/* Combined pulse + shake for 3…2…1 seconds */
 .timer-warning {
   animation: timerPulseRed 0.6s ease-in-out infinite,
              timerShake 0.6s ease-in-out infinite;
 }
 
-/* --- Final-second faster pulse --- */
+/* Faster version used at exactly 1 second remaining */
 @keyframes timerPulseFast {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.32); }
@@ -65,7 +72,11 @@
              timerShake 0.35s ease-in-out infinite;
 }
 
-/* --- Shake entire question card on timeout --- */
+/* ============================================================
+   SHAKE EFFECT – applied when a question times out
+   ============================================================ */
+
+/* Large screen-shake animation for the entire question card */
 @keyframes shakeCard {
   0%, 100% { transform: translateX(0); }
   15%      { transform: translateX(-6px); }
@@ -77,12 +88,16 @@
 }
 
 .shake-card {
+  /* Applied temporarily by JS, removed after animation completes */
   animation: shakeCard 0.6s ease-in-out;
 }
+
 /* ============================================================
-   CONFETTI PARTICLES
+   CONFETTI PARTICLE SYSTEM
+   Triggered when a player earns 3 stars or completes a level.
    ============================================================ */
 
+/* Container keeps confetti inside the summary card area */
 .confetti-container {
   position: absolute;
   inset: 0;
@@ -91,16 +106,22 @@
   z-index: 30;
 }
 
+/* Individual confetti piece (colour + movement varies in JS) */
 .confetti-piece {
   position: absolute;
   width: 6px;
   height: 10px;
   border-radius: 2px;
   opacity: 0.95;
+
+  /* Horizontal drift injected from JS via CSS variable */
   --x-shift: 0px;
+
+  /* Falling animation (4 seconds) */
   animation: confetti-fall 4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
+/* Falling path with rotation */
 @keyframes confetti-fall {
   0% {
     transform: translate(0, -20px) rotateZ(0deg);
