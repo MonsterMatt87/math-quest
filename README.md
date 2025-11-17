@@ -182,9 +182,9 @@ For deeper details on:
 
 	•	How to tune difficulty, timers, and star thresholds
 
-see:
+See the developer documentation here: 
 
-**[DEV_NOTES.md](https://github.com/MonsterMatt87/math-quest/blob/main/DEV_NOTES.md)**
+👉 **[DEV_NOTES.md](https://github.com/MonsterMatt87/math-quest/blob/main/DEV_NOTES.md)**
 
 ⸻
 
