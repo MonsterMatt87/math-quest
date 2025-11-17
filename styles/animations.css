@@ -1,3 +1,9 @@
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/animations.css
+  Role: Keyframe animations (shake, bump, fade, confetti, etc.) and animation helper classes.
+*/
+
 @keyframes floatLogo {
   0% {
     transform: translateY(0);
