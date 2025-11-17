@@ -5,7 +5,10 @@
 
 "use strict";
 
-// --- DOM references ---
+// ============================================================
+//  🔗 DOM ELEMENT REFERENCES
+// ============================================================
+
 const startScreen = document.getElementById("startScreen");
 const gameScreen = document.getElementById("gameScreen");
 const summaryScreen = document.getElementById("summaryScreen");
@@ -49,7 +52,11 @@ const confetti = document.getElementById("confetti");
 const leaderboardEl = document.getElementById("leaderboard");
 const leaderboardList = document.getElementById("leaderboardList");
 
-// --- Event wiring ---
+
+// ============================================================
+//  🚀 START BUTTON – CREATE/RESUME PLAYER AND BEGIN LEVEL
+// ============================================================
+
 startBtn.addEventListener("click", () => {
   const newName = playerNameInput.value.trim();
   if (!newName) {
@@ -64,6 +71,7 @@ startBtn.addEventListener("click", () => {
     state.playerName = existing.name;
     state.progress = existing.progress;
   } else {
+    // New profile
     state.playerName = newName;
     state.progress = {
       highestLevelUnlocked: 1,
@@ -88,6 +96,11 @@ startBtn.addEventListener("click", () => {
   }
 });
 
+
+// ============================================================
+//  ⚠️ DANGER ZONE – Reset Progress / Clear All Players
+// ============================================================
+
 resetProgressBtn.addEventListener("click", () => {
   if (
     confirm(
@@ -108,6 +121,11 @@ if (clearPlayersBtn) {
   });
 }
 
+
+// ============================================================
+//  🧭 NAVIGATION: MENU, REPLAY, NEXT LEVEL
+// ============================================================
+
 backToMenuBtn.addEventListener("click", goToMenu);
 toMenuBtn.addEventListener("click", goToMenu);
 
@@ -120,7 +138,11 @@ nextLevelBtn.addEventListener("click", () => {
   startLevel(nextIndex);
 });
 
-// --- Initial load ---
+
+// ============================================================
+//  📦 INITIAL LOAD – RESTORE STATE + RENDER UI
+// ============================================================
+
 loadProgress();
 playerPillName.textContent = state.playerName || "-";
 renderLevelGrid();
@@ -135,7 +157,11 @@ if (
   resumeHint.style.display = "block";
 }
 
-// --- Theme toggle ---
+
+// ============================================================
+//  🌗 THEME TOGGLING – Dark / Light Mode Switch
+// ============================================================
+
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 
@@ -153,6 +179,7 @@ if (themeToggle) {
     const isLight = document.body.classList.contains("light");
     localStorage.setItem("mqTheme", isLight ? "light" : "dark");
 
+    // Morph animation for icon
     if (themeIcon) {
       themeIcon.classList.add("morph");
       setTimeout(() => themeIcon.classList.remove("morph"), 350);
