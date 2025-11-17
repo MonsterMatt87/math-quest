@@ -1,10 +1,14 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/xp.css
-  Role: XP bar, progress indicators, and star/XP-related visuals.
+  Role: XP bar, progress indicators, and XP/star-related visual UI components.
 */
 
-/* --- XP bar & progression --- */
+/* ============================================================
+   XP PILL (Small inline badge showing XP or stars)
+   ============================================================ */
+
+/* Inline pill showing star or progress info */
 .xp-pill {
   font-size: 11px;
   padding: 3px 9px;
@@ -16,31 +20,51 @@
   gap: 5px;
 }
 
+/* Slightly larger, bold number inside the XP pill */
 .xp-pill strong {
   font-size: 13px;
 }
 
+/* ============================================================
+   XP BAR WRAPPER
+   Holds the progress bar and provides background + border.
+   ============================================================ */
+
 .xp-bar-wrap {
   margin-top: 10px;
   width: 100%;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 999px;
-  border: 1px solid rgba(30, 64, 175, 0.7);
-  overflow: hidden;
   height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(30, 64, 175, 0.7);
 }
 
+/* ============================================================
+   XP BAR (Filling progress indicator)
+   ============================================================ */
+
+/* Fills horizontally as total stars increase */
 .xp-bar {
   height: 100%;
-  background: linear-gradient(90deg, #22d3ee, #38bdf8, #fbbf24);
-  width: 0%;
+  width: 0%; /* dynamically updated via JS */
+  background: linear-gradient(
+    90deg,
+    #22d3ee,
+    #38bdf8,
+    #fbbf24
+  ); /* turquoise → blue → gold */
   transition: width 0.4s ease-out;
 }
+
+/* ============================================================
+   XP CAPTION (Text beneath the progress bar)
+   ============================================================ */
 
 .xp-caption {
   margin-top: 4px;
   font-size: 11px;
   color: var(--text-soft);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* “Overall progress” left / star count right */
 }
