@@ -1,6 +1,8 @@
-/* =========================================================
- * GAME SCREEN — Clean Card Layout (Layout A)
- * ========================================================= */
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/game.css
+  Role: Game screen styling – question card, options grid, timer, streak, and bottom bar.
+*/
 
 /* Game header */
 .game-header {
