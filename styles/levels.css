@@ -1,55 +1,90 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/levels.css
-  Role: Level grid, level tiles, lock states, and level-specific visual cues.
+  Role: Level grid layout, individual level tiles, hover/lock states,
+        star display, and difficulty tags.
 */
 
-/* --- Level grid & tiles --- */
+/* ============================================================
+   LEVEL GRID LAYOUT
+   Displays level tiles in a responsive grid.
+   ============================================================ */
+
 .levels-grid {
   margin-top: 10px;
   display: grid;
+
+  /* 3 columns on desktop */
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
+/* 2 columns on medium screens */
 @media (max-width: 900px) {
   .levels-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* 1 column on small screens (mobile) */
 @media (max-width: 600px) {
   .levels-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 
+/* ============================================================
+   LEVEL TILE — MAIN BLOCK
+   Each level preview card.
+   ============================================================ */
+
 .level-tile {
   border-radius: 16px;
   padding: 10px 12px;
-  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.95));
+
+  /* Subtle blue-to-dark radial gradient */
+  background: radial-gradient(
+    circle at top,
+    rgba(56, 189, 248, 0.18),
+    rgba(15, 23, 42, 0.95)
+  );
+
   border: 1px solid rgba(148, 163, 184, 0.7);
   font-size: 13px;
+
   cursor: default;
+
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   position: relative;
   overflow: hidden;
   min-height: 130px;
-  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out;
+
+  /* Hover animation */
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out;
 }
 
+/* Hover effect only for unlocked tiles */
 .level-tile:not(.locked):hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
   border-color: var(--accent);
 }
 
+/* Locked levels appear dimmed and greyed out */
 .level-tile.locked {
   opacity: 0.45;
   filter: grayscale(0.7);
 }
+
+/* ============================================================
+   TILE HEADER — LEVEL NAME & EMOJI
+   ============================================================ */
 
 .level-title {
   font-weight: 600;
@@ -60,6 +95,10 @@
   line-height: 1.35;
 }
 
+/* ============================================================
+   TILE META (difficulty + stars)
+   ============================================================ */
+
 .level-meta {
   display: flex;
   justify-content: space-between;
@@ -67,6 +106,10 @@
   font-size: 11px;
   color: var(--text-soft);
 }
+
+/* ============================================================
+   OPTIONAL FOOTER (e.g. “Questions: 12” + “Tap to play”)
+   ============================================================ */
 
 .level-footer {
   margin-top: 4px;
@@ -77,27 +120,39 @@
   align-items: center;
 }
 
+/* ============================================================
+   STARS DISPLAY
+   ============================================================ */
+
 .stars {
   display: inline-flex;
   gap: 2px;
   font-size: 14px;
 }
 
+/* Filled (earned) star */
 .star-filled {
   color: #facc15;
   text-shadow: 0 0 10px rgba(250, 204, 21, 0.7);
 }
 
+/* Empty star outline */
 .star-empty {
   color: rgba(148, 163, 184, 0.7);
 }
+
+/* ============================================================
+   DIFFICULTY TAG (e.g. “Warm-up”, “Challenge+”)
+   ============================================================ */
 
 .level-tag {
   font-size: 11px;
   padding: 2px 7px;
   border-radius: 999px;
+
   background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(148, 163, 184, 0.7);
+
   display: inline-flex;
   align-items: center;
   gap: 4px;
