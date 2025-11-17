@@ -1,3 +1,9 @@
+/*
+  Math Quest – Mental Math Trainer
+  File: styles/summary.css
+  Role: Level summary screen – stats grid, stars display, and summary actions.
+*/
+
 /* --- Summary screen --- */
 .summary-stars {
   display: flex;
