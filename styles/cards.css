@@ -1,36 +1,48 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/cards.css
-  Role: Card components used across the app (start cards, summary cards, etc.).
+  Role: Card components used across the app (start screen cards,
+        summary cards, input fields, feature lists, and other
+        reusable container UI elements).
 */
 
-/* --- Cards & content containers --- */
-/* --- Reusable Card --- */
+/* ============================================================
+   BASE CARD COMPONENT
+   Used for almost all boxed UI: start card, summary card, etc.
+   ============================================================ */
 .card {
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.9);     /* Dark blurred glass look */
+  border-radius: var(--radius-lg);       /* Soft rounded corners */
   padding: 18px 16px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.4); /* Subtle outline */
 }
+
+/* Light theme override for cards */
 .light .card {
   background: #ffffff;
   border-color: rgba(71,85,105,0.35);
 }
 
+/* Card titles */
 .card h2 {
   margin: 0 0 4px;
   font-size: 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px; /* Supports emoji or small icon */
 }
 
+/* Card description text */
 .card p {
   margin: 4px 0 10px;
   font-size: 14px;
   color: var(--text-soft);
 }
 
+/* ============================================================
+   FEATURE LIST (start screen)
+   Bulletless list with icons such as stars, targets, locks.
+   ============================================================ */
 .feature-list {
   list-style: none;
   padding: 0;
@@ -47,9 +59,13 @@
 }
 
 .feature-icon {
-  font-size: 14px;
+  font-size: 14px; /* Emoji/icon before each feature */
 }
 
+/* ============================================================
+   FORMS — Labels and Input Fields
+   Used on start screen for player name entry.
+   ============================================================ */
 label {
   font-size: 13px;
   color: var(--text-soft);
@@ -57,24 +73,34 @@ label {
   margin-bottom: 4px;
 }
 
+/* Player name input box */
 input[type="text"] {
   width: 100%;
   padding: 10px 11px;
-  border-radius: 999px;
+  border-radius: 999px;                     /* Pill field */
   border: 1px solid rgba(148, 163, 184, 0.7);
   background: rgba(15, 23, 42, 0.95);
   color: var(--text-main);
   font-size: 14px;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.07s ease;
+  transition: 
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.07s ease;
 }
 
+/* Input focus effect */
 input[type="text"]:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
   transform: translateY(-1px);
 }
 
+/* ============================================================
+   BUTTON LAYOUT (inside cards)
+   ============================================================ */
+
+/* Main row of buttons (Start, Reset, etc.) */
 .btn-row {
   display: flex;
   flex-wrap: wrap;
@@ -82,6 +108,7 @@ input[type="text"]:focus {
   margin-top: 12px;
 }
 
+/* Danger zone row — reset buttons */
 .danger-row {
   margin-top: 8px;
   display: flex;
@@ -91,6 +118,7 @@ input[type="text"]:focus {
   font-size: 11px;
 }
 
+/* Header label for danger zone */
 .danger-label {
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -99,26 +127,34 @@ input[type="text"]:focus {
   font-weight: 600;
 }
 
+/* ============================================================
+   RECENT PLAYERS LIST
+   Saved user profiles appear under start card.
+   ============================================================ */
 .recent-players {
   font-size: 11px;
   color: var(--text-soft);
 }
 
+/* "Recent Players:" text */
 .recent-players .recent-title {
   margin-bottom: 4px;
 }
 
+/* Row of recent player buttons */
 .recent-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
+/* Individual player buttons (small form) */
 .recent-player-btn {
   font-size: 11px;
   padding: 4px 10px;
 }
 
+/* Highlight active (currently selected) profile */
 .recent-player-btn.active {
   border-color: var(--accent);
   opacity: 1;
