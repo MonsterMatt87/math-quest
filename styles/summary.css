@@ -1,10 +1,15 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/summary.css
-  Role: Level summary screen – stats grid, stars display, and summary actions.
+  Role: Level summary screen – stars animation, performance stats,
+        summary buttons, and confetti overlay container.
 */
 
-/* --- Summary screen --- */
+/* ============================================================
+   STAR DISPLAY (Top of Summary Screen)
+   ============================================================ */
+
+/* Container for stars (1–3 stars earned) */
 .summary-stars {
   display: flex;
   gap: 4px;
@@ -12,10 +17,12 @@
   margin-top: 4px;
 }
 
+/* Special animation for earning 3 stars */
 .summary-stars.three-star-win {
   animation: starBurst 0.9s ease-out;
 }
 
+/* Star burst animation: scale + glow flicker */
 @keyframes starBurst {
   0% {
     transform: scale(0.8) rotate(0deg);
@@ -35,28 +42,43 @@
   }
 }
 
+/* ============================================================
+   PERFORMANCE STATS GRID
+   Organizes accuracy, speed, best streak, and total stars.
+   ============================================================ */
+
 .summary-grid {
   display: grid;
+
+  /* Auto-fit responsive layout */
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
 
+/* Small stat boxes (Accuracy, Questions, Streak, etc.) */
 .stat-chip {
   border-radius: 14px;
   padding: 8px 10px;
+
   background: rgba(15, 23, 42, 0.96);
   border: 1px solid rgba(148, 163, 184, 0.6);
+
   font-size: 12px;
 }
 
+/* Stat value text */
 .stat-chip strong {
   display: block;
   font-size: 14px;
   margin-bottom: 2px;
 }
-/* Confetti overlay on summary screen */
-.summary-card {
-  position: relative; /* make it the positioning context */
-}
 
+/* ============================================================
+   CONFETTI OVERLAY
+   Allows confettiContainer to float above the summary card.
+   ============================================================ */
+
+.summary-card {
+  position: relative; /* Required so #confettiContainer is positioned correctly */
+}
