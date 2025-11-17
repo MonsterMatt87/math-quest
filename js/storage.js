@@ -5,7 +5,10 @@
 
 "use strict";
 
-// --- Game configuration ---
+// ============================================================
+//  🎮 GAME CONFIGURATION – Level definitions
+// ============================================================
+
 const LEVELS = [
   {
     id: 1,
@@ -101,7 +104,11 @@ const LEVELS = [
 
 const STORAGE_KEY = "mathQuestProgress-v1";
 
-// --- Global state (shared across modules) ---
+
+// ============================================================
+//  🌍 GLOBAL STATE – Shared across modules
+// ============================================================
+
 let timerId = null;
 let timeLeft = 10;
 let questionLocked = false;
@@ -109,6 +116,7 @@ let questionLocked = false;
 let profiles = [];
 let leaderboard = [];
 
+// Current in-memory session state
 let state = {
   playerName: "",
   currentLevelIndex: 0,
@@ -125,19 +133,29 @@ let state = {
   },
 };
 
-// --- Storage helpers ---
+
+// ============================================================
+//  💾 STORAGE HELPERS – Load/save profiles + leaderboard
+// ============================================================
+
+/**
+ * Load saved progress, profiles, and leaderboard from localStorage.
+ * Supports both legacy single-profile and new multi-profile formats.
+ */
 function loadProgress() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
+
     const parsed = JSON.parse(raw);
 
     // New multi-profile format
     if (parsed && Array.isArray(parsed.profiles) && parsed.profiles.length > 0) {
       profiles = parsed.profiles;
-      const currentName = parsed.currentName || parsed.playerName;
 
+      const currentName = parsed.currentName || parsed.playerName;
       let currentProfile = profiles[0];
+
       if (currentName) {
         const found = profiles.find((p) => p.name === currentName);
         if (found) currentProfile = found;
@@ -150,6 +168,7 @@ function loadProgress() {
     else if (parsed && parsed.progress) {
       state.progress = parsed.progress;
       if (parsed.playerName) state.playerName = parsed.playerName;
+
       profiles = [
         {
           name: state.playerName,
@@ -158,6 +177,7 @@ function loadProgress() {
       ];
     }
 
+    // Load leaderboard if present
     if (parsed && Array.isArray(parsed.leaderboard)) {
       leaderboard = parsed.leaderboard;
     }
@@ -166,20 +186,28 @@ function loadProgress() {
   }
 }
 
+/**
+ * Save current player progress + profiles + leaderboard to localStorage.
+ * Keeps at most the last 3 player profiles.
+ */
 function saveProgress() {
   try {
     const name = state.playerName;
     const currentProgress = state.progress;
 
     const existingIndex = profiles.findIndex((p) => p.name === name);
+
     if (existingIndex >= 0) {
+      // Update existing profile and move it to the front (most recent)
       profiles[existingIndex].progress = currentProgress;
       const [p] = profiles.splice(existingIndex, 1);
       profiles.unshift(p);
     } else {
+      // Insert new profile at the front
       profiles.unshift({ name, progress: currentProgress });
     }
 
+    // Only keep the last 3 profiles
     if (profiles.length > 3) {
       profiles = profiles.slice(0, 3);
     }
@@ -189,14 +217,25 @@ function saveProgress() {
       profiles,
       leaderboard,
     };
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   } catch (e) {
     console.warn("Could not save progress", e);
   }
 
+  // Refresh recent players UI after saving
   renderRecentPlayers();
 }
 
+
+// ============================================================
+//  🔁 PROGRESS RESET / CLEAR PLAYERS
+// ============================================================
+
+/**
+ * Reset progress for the current player only, keeping their profile entry.
+ * Also updates leaderboard and UI.
+ */
 function resetProgress() {
   // Only reset progress for the current player
   state.progress = {
@@ -223,6 +262,9 @@ function resetProgress() {
   renderLeaderboard();
 }
 
+/**
+ * Clear all player profiles and current state, but preserve leaderboard.
+ */
 function clearAllPlayers() {
   // Do not wipe leaderboard; only clear saved players and current state
   profiles = [];
@@ -260,9 +302,19 @@ function clearAllPlayers() {
   }
 }
 
+
+// ============================================================
+//  🏆 LEADERBOARD – Update ranking for current player
+// ============================================================
+
+/**
+ * Insert a new leaderboard entry for the current player and resort.
+ * Does not deduplicate names – each run is recorded.
+ */
 function updateLeaderboardForCurrentPlayer() {
   const name = state.playerName;
   if (!name) return;
+
   const total = state.progress.totalStars || 0;
 
   // Always add a new entry — do NOT replace existing ones
