@@ -1,36 +1,51 @@
 /*
   Math Quest – Mental Math Trainer
   File: styles/theme-light.css
-  Role: Light theme overrides – background, text, cards, and controls in light mode.
+  Role: Light theme overrides – bright surfaces, enhanced readability,
+        and adjusted borders/shadows optimized for light mode.
 */
 
+/* ============================================================
+   GLOBAL LIGHT BACKGROUND & TEXT
+   ============================================================ */
+
+/* Main light gradient + base text color */
 body.light {
   background: radial-gradient(circle at top, #e2e8f0, #ffffff 55%);
   color: var(--text-main);
 }
 
-/* Improve readability & contrast in light mode */
+/* ============================================================
+   HEADINGS & TITLES
+   Ensures headings remain readable against light backgrounds.
+   ============================================================ */
 
-/* Improve heading readability */
+/* Main heading colors */
 body.light h2,
 body.light h3 {
   color: #1e293b;
 }
 
-/* Specific header text fixes */
+/* Manually-adjusted specific heading elements */
 body.light #startTitle,
 body.light #insideTitle,
 body.light #leaderboardTitle {
   color: #1e293b !important;
 }
 
-/* Card surfaces */
+/* ============================================================
+   CARD SURFACES & GENERAL PANELS
+   ============================================================ */
+
 body.light .card {
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Player pill & tag pills */
+/* ============================================================
+   PLAYER PILL / TAG STYLING
+   ============================================================ */
+
 body.light .player-pill,
 body.light .pill-tag {
   background: rgba(255,255,255,0.75);
@@ -38,7 +53,10 @@ body.light .pill-tag {
   color: #1e293b;
 }
 
-/* Secondary & small buttons */
+/* ============================================================
+   BUTTONS (Light mode overrides)
+   ============================================================ */
+
 body.light button.secondary {
   background: #f1f5f9;
   color: #1e293b;
@@ -51,91 +69,7 @@ body.light button.small {
   border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* Level tiles */
-body.light .level-tile {
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  color: #1e293b;
-}
-
-body.light .level-tile .level-number {
-  color: #1e293b;
-}
-
-body.light .level-tile .level-label {
-  color: #475569;
-}
-
-/* Leaderboard */
-body.light .leaderboard {
-  border: none;
-  box-shadow: none;
-  background: #ffffff;
-}
-
-body.light .leaderboard .leaderboard-entry {
-  border-bottom: 1px solid rgba(0,0,0,0.04);
-  color: #1e293b;
-}
-
-/* Game question card */
-body.light .question-card {
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  color: #1e293b;
-}
-
-/* Ensure question text is readable in light mode */
-body.light .question-text {
-  color: #1e293b !important;
-}
-
-body.light .question-sub {
-  color: #475569 !important;
-}
-
-body.light .options-grid button.option-btn {
-  background: #f8fafc;
-  color: #1e293b;
-  border: 1px solid rgba(0,0,0,0.1);
-}
-
-body.light .option-label {
-  color: #475569 !important;
-}
-
-/* Feedback text */
-body.light .feedback.good {
-  color: #16a34a;
-}
-body.light .feedback.bad {
-  color: #dc2626;
-}
-
-/* Enhanced light-mode surfaces */
-body.light {
-  background: radial-gradient(circle at 20% 12%, #f1f5f9, #ffffff 70%);
-}
-
-body.light .card,
-body.light .question-card,
-body.light .leaderboard,
-body.light .level-tile {
-  background: linear-gradient(145deg, #ffffff, #f6f7f8);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-
-/* Timer & streak visibility fix */
-body.light #timerLabel,
-body.light #streakLabel {
-  color: #1e293b !important;  /* strong dark text */
-}
-
-body.light .bottom-bar {
-  color: #475569 !important; /* softer supporting text */
-}
-
-/* Light-mode danger buttons — correct minimal overrides */
+/* --- Danger button variants (soft + hard) --- */
 body.light button.danger-soft {
   background: #fef2f2 !important;
   color: #b91c1c !important;
@@ -159,7 +93,123 @@ body.light button.danger-hard:hover {
   color: #ffffff !important;
   border-color: #b91c1c !important;
 }
-/* Fix: Brand title + subtitle visibility in light mode */
+
+/* ============================================================
+   LEVEL TILES (Level select grid)
+   ============================================================ */
+
+body.light .level-tile {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #1e293b;
+}
+
+body.light .level-tile .level-number {
+  color: #1e293b;
+}
+
+body.light .level-tile .level-label {
+  color: #475569;
+}
+
+/* ============================================================
+   LEADERBOARD
+   Lighter surfaces with minimal borders.
+   ============================================================ */
+
+body.light .leaderboard {
+  border: none;
+  box-shadow: none;
+  background: #ffffff;
+}
+
+body.light .leaderboard .leaderboard-entry {
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: #1e293b;
+}
+
+/* ============================================================
+   QUESTION CARD (game screen)
+   ============================================================ */
+
+body.light .question-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #1e293b;
+}
+
+/* Question text/subtitle clarity */
+body.light .question-text {
+  color: #1e293b !important;
+}
+
+body.light .question-sub {
+  color: #475569 !important;
+}
+
+/* Options */
+body.light .options-grid button.option-btn {
+  background: #f8fafc;
+  color: #1e293b;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+body.light .option-label {
+  color: #475569 !important;
+}
+
+/* ============================================================
+   FEEDBACK COLORS
+   ============================================================ */
+
+body.light .feedback.good {
+  color: #16a34a;
+}
+
+body.light .feedback.bad {
+  color: #dc2626;
+}
+
+/* ============================================================
+   LIGHT-MODE SURFACE TREATMENT
+   Subtle gradient + soft shadows for depth.
+   ============================================================ */
+
+body.light {
+  background: radial-gradient(circle at 20% 12%, #f1f5f9, #ffffff 70%);
+}
+
+body.light .card,
+body.light .question-card,
+body.light .leaderboard,
+body.light .level-tile {
+  background: linear-gradient(145deg, #ffffff, #f6f7f8);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* ============================================================
+   TIMER + STREAK (Ensure visibility)
+   ============================================================ */
+
+body.light #timerLabel,
+body.light #streakLabel {
+  color: #1e293b !important;
+}
+
+body.light .bottom-bar {
+  color: #475569 !important;
+}
+
+/* Timer should still go red when warnings trigger */
+body.light #timerLabel.timer-warning {
+  color: #ef4444 !important;
+}
+
+/* ============================================================
+   BRANDING FIXES (Header)
+   Ensures header logo + text stay visible in light mode.
+   ============================================================ */
+
 body.light .brand,
 body.light .brand h1,
 body.light .brand-title,
@@ -171,9 +221,4 @@ body.light #brandSubtitle {
 body.light header .brand,
 body.light header .brand * {
   color: #1e293b !important;
-}
-
-/* Ensure timer turns red during final seconds in light mode */
-body.light #timerLabel.timer-warning {
-  color: #ef4444 !important;
 }
