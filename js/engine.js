@@ -5,7 +5,9 @@
 
 "use strict";
 
-// --- Core game engine ---
+// ============================================================
+//  ⏱️ Question Timer – start/stop + warning states
+// ============================================================
 
 let timerInterval = null;
 let timerRemaining = 10;
@@ -21,6 +23,7 @@ function startQuestionTimer() {
     timerRemaining--;
     timerLabel.textContent = `⏱️ ${timerRemaining}s`;
 
+    // Animate timer as it approaches 0
     if (timerRemaining === 3) {
       timerLabel.classList.add("timer-warning");
     }
@@ -47,7 +50,12 @@ function stopTimer() {
   timerLabel.style.animation = "";
 }
 
+// ============================================================
+//  🎮 Level lifecycle – start, per-question flow, end
+// ============================================================
+
 function startLevel(levelIndex) {
+  // Reset per-level state
   state.currentLevelIndex = levelIndex;
   state.questionIndex = 0;
   state.correctCount = 0;
@@ -56,10 +64,10 @@ function startLevel(levelIndex) {
   state.answersThisLevel = 0;
   state.currentQuestion = null;
 
+  // Reset UI state
   feedbackEl.textContent = "";
   feedbackEl.className = "feedback";
   streakLabel.textContent = "🔥 Streak: 0";
-
   questionProgress.style.width = "0%";
 
   const level = LEVELS[state.currentLevelIndex];
@@ -70,13 +78,17 @@ function startLevel(levelIndex) {
   askNextQuestion();
 }
 
+// ------------------------------------------------------------
+//  ▶️ Ask next question – generate, render, and start timer
+// ------------------------------------------------------------
+
 function askNextQuestion() {
- const questionCard = document.getElementById("questionCard");
+  const questionCard = document.getElementById("questionCard");
 
-// Reset any previous shake animation before showing a new question
-questionCard.style.animation = "";
+  // Reset any previous shake animation before showing a new question
+  questionCard.style.animation = "";
 
-const level = LEVELS[state.currentLevelIndex];
+  const level = LEVELS[state.currentLevelIndex];
   if (state.questionIndex >= level.questions) {
     endLevel();
     return;
@@ -86,6 +98,7 @@ const level = LEVELS[state.currentLevelIndex];
   state.currentQuestion = q;
   questionLocked = false;
 
+  // Populate question / UI
   questionText.textContent = q.text;
   questionSub.textContent = "Tap the correct answer:";
   feedbackEl.textContent = "";
@@ -97,10 +110,12 @@ const level = LEVELS[state.currentLevelIndex];
     state.questionIndex + 1
   } of ${level.questions}`;
 
+  // Bump animation for question card
   questionCard.classList.remove("bump");
   void questionCard.offsetWidth; // reflow
   questionCard.classList.add("bump");
 
+  // Render answer options
   optionsGrid.innerHTML = "";
   q.options.forEach((value, idx) => {
     const btn = document.createElement("button");
@@ -113,8 +128,13 @@ const level = LEVELS[state.currentLevelIndex];
     optionsGrid.appendChild(btn);
   });
 
+  // Start per-question timer
   startQuestionTimer();
 }
+
+// ============================================================
+//  🧮 Question generation – builds math expressions per level
+// ============================================================
 
 function generateQuestion(level) {
   const op = level.ops[randInt(0, level.ops.length - 1)];
@@ -139,6 +159,7 @@ function generateQuestion(level) {
     a = b * quotient;
     correct = a / b;
   } else {
+    // Fallback – should not happen if level.ops is configured correctly
     a = 0;
     b = 0;
     correct = 0;
@@ -151,6 +172,7 @@ function generateQuestion(level) {
       ? `${a} ÷ ${b} = ?`
       : `${a} ${op} ${b} = ?`;
 
+  // Build a small set of plausible options around the correct answer
   const optionsSet = new Set();
   optionsSet.add(correct);
 
@@ -171,6 +193,10 @@ function generateQuestion(level) {
   };
 }
 
+// ============================================================
+//  ✅ Answer handling – scoring, streaks, and feedback
+// ============================================================
+
 function handleAnswer(btn, chosenValue) {
   if (!state.currentQuestion || questionLocked) return;
   questionLocked = true;
@@ -178,10 +204,10 @@ function handleAnswer(btn, chosenValue) {
 
   const correct = state.currentQuestion.correct;
   setOptionsDisabled(true);
-
   state.answersThisLevel++;
 
   if (chosenValue === correct) {
+    // Correct answer: update streak and best streak
     btn.classList.add("correct");
     showFeedback("Nice! That’s correct 🎉", true);
     state.correctCount++;
@@ -190,6 +216,7 @@ function handleAnswer(btn, chosenValue) {
       state.bestStreak = state.currentStreak;
     }
   } else {
+    // Wrong answer: reset streak and highlight the correct option
     btn.classList.add("wrong");
     showFeedback(`Almost! The answer was ${correct}.`, false);
     state.currentStreak = 0;
@@ -207,42 +234,53 @@ function handleAnswer(btn, chosenValue) {
   }, 1400);
 }
 
+// ============================================================
+//  🕒 Timeout handling – 0s left, shake card + reveal answer
+// ============================================================
+
 function handleTimeout() {
   if (questionLocked || !state.currentQuestion) return;
   questionLocked = true;
 
-setTimeout(() => {
-  const questionCard = document.getElementById("questionCard");
-  if (questionCard) {
-    // Remove the bump animation so shake can take over
-    questionCard.classList.remove("bump");
+  // Shake the entire question card after a brief delay,
+  // so it is fully visible when the animation starts.
+  setTimeout(() => {
+    const questionCard = document.getElementById("questionCard");
+    if (questionCard) {
+      // Remove the bump animation so shake can take over
+      questionCard.classList.remove("bump");
 
-    questionCard.classList.add("shake-card");
-    setTimeout(() => questionCard.classList.remove("shake-card"), 600);
-  }
-}, 50);
+      questionCard.classList.add("shake-card");
+      setTimeout(() => questionCard.classList.remove("shake-card"), 600);
+    }
+  }, 50);
 
   setOptionsDisabled(true);
   state.answersThisLevel++;
   state.currentStreak = 0;
   streakLabel.textContent = `🔥 Streak: ${state.currentStreak}`;
 
-// Delay ALL DOM updates so shake animation can play first
-setTimeout(() => {
-  showFeedback(
-    `Time's up. The answer was ${state.currentQuestion.correct}.`,
-    false
-  );
+  // Delay ALL DOM updates so shake animation can play first
+  setTimeout(() => {
+    showFeedback(
+      `Time's up. The answer was ${state.currentQuestion.correct}.`,
+      false
+    );
 
-  highlightCorrectOption(state.currentQuestion.correct);
-}, 700);
+    highlightCorrectOption(state.currentQuestion.correct);
+  }, 700);
 
+  // After showing feedback for a few seconds, move on
   setTimeout(() => {
     state.questionIndex++;
     setOptionsDisabled(false);
     askNextQuestion();
   }, 3500);
 }
+
+// ============================================================
+//  ⭐ End of level – accuracy, stars, progress, summary
+// ============================================================
 
 function endLevel() {
   stopTimer();
@@ -270,6 +308,7 @@ function endLevel() {
 
   updateLeaderboardForCurrentPlayer();
 
+  // Unlock next level when conditions are met
   if (
     level.id === state.progress.highestLevelUnlocked &&
     state.currentLevelIndex < LEVELS.length - 1 &&
@@ -283,6 +322,7 @@ function endLevel() {
   updateXPBar();
   renderLeaderboard();
 
+  // Summary title and messaging based on performance
   summaryTitle.textContent = `Level ${level.id} complete! ${level.emoji}`;
   if (starsEarned === 3) {
     summarySubtitle.textContent =
@@ -298,6 +338,7 @@ function endLevel() {
       "Tough round. Try again to start collecting stars.";
   }
 
+  // Render star icons in the summary panel
   summaryStars.innerHTML = "";
   for (let i = 1; i <= 3; i++) {
     const span = document.createElement("span");
@@ -320,6 +361,7 @@ function endLevel() {
     summaryStars.classList.remove("three-star-win");
   }
 
+  // Summary stats
   summaryAccuracy.textContent = `${accuracy}% correct`;
   summarySpeed.textContent = `${state.answersThisLevel} question${
     state.answersThisLevel === 1 ? "" : "s"
@@ -327,11 +369,12 @@ function endLevel() {
   summaryBestStreak.textContent = `🔥 x${state.bestStreak}`;
   summaryTotalStars.textContent = `${state.progress.totalStars} ⭐`;
 
-
+  // Particle confetti for perfect runs
   if (starsEarned === 3 && typeof triggerConfetti === "function") {
     triggerConfetti();
   }
 
+  // Hide next-level button if on last level or locked
   if (
     state.currentLevelIndex >= LEVELS.length - 1 ||
     state.progress.highestLevelUnlocked <= LEVELS[state.currentLevelIndex].id
@@ -343,6 +386,10 @@ function endLevel() {
 
   switchScreen("summaryScreen");
 }
+
+// ============================================================
+//  🏠 Back to menu – sync UI with current player progress
+// ============================================================
 
 function goToMenu() {
   stopTimer();
