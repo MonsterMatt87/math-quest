@@ -1,3 +1,8 @@
+// Math Quest – Mental Math Trainer
+// File: js/events.js
+// Role: Wiring for all user interactions – button clicks, answer selection,
+//       start/reset actions, and theme toggling.
+
 "use strict";
 
 // --- DOM references ---
