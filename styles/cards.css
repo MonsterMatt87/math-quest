@@ -1,0 +1,122 @@
+
+
+
+/* --- Cards & content containers --- */
+/* --- Reusable Card --- */
+.card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+.light .card {
+  background: #ffffff;
+  border-color: rgba(71,85,105,0.35);
+}
+
+.card h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card p {
+  margin: 4px 0 10px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.feature-icon {
+  font-size: 14px;
+}
+
+label {
+  font-size: 13px;
+  color: var(--text-soft);
+  display: block;
+  margin-bottom: 4px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.07s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.danger-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+
+.danger-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--danger);
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.recent-players {
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+.recent-players .recent-title {
+  margin-bottom: 4px;
+}
+
+.recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.recent-player-btn {
+  font-size: 11px;
+  padding: 4px 10px;
+}
+
+.recent-player-btn.active {
+  border-color: var(--accent);
+  opacity: 1;
+}

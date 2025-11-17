@@ -1,0 +1,37 @@
+/* --- Base & variables (extracted) --- */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: #0f172a;
+  --card: #020617;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+  --accent-strong: #fbbf24;
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+  --danger: #f97373;
+  --success: #4ade80;
+  --radius-lg: 18px;
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.6);
+}
+
+/* Light Theme Variables */
+:root.light {
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --accent: #0ea5e9;
+  --accent-soft: rgba(14,165,233,0.18);
+  --accent-strong: #ea580c;
+  --text-main: #1e293b;
+  --text-soft: #475569;
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+body.light {
+  background: radial-gradient(circle at top, #e2e8f0, #ffffff 55%);
+  color: var(--text-main);
+}
+
+* {
+  box-sizing: border-box;
+}
+

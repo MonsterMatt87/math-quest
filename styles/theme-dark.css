@@ -1,0 +1,41 @@
+body {
+  background: radial-gradient(circle at 20% 12%, #1e293b, #020617 70%);
+  color: var(--text-main);
+}
+
+/* Improve contrast of question text in dark mode */
+body .question-text,
+body .question-sub {
+  color: #f8fafc; /* near-white for high contrast */
+}
+
+/* Improve contrast of option buttons */
+body .option-btn {
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.18);
+}
+
+body .option-label {
+  color: #cbd5e1;
+}
+
+/* Improve readability inside question card */
+body .question-card {
+  color: #f8fafc;
+}
+
+/* Bottom bar labels */
+body .bottom-bar,
+body #timerLabel,
+body #streakLabel {
+  color: #e2e8f0;
+}
+
+/* Enhanced dark-mode surfaces */
+body .card,
+body .question-card,
+body .level-tile,
+body .leaderboard {
+  background: linear-gradient(145deg, #0f172a, #1e293b);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.55);
+}
