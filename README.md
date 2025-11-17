@@ -1,6 +1,7 @@
 ## 📘 Math Quest – Mental Math Trainer
 
 Math Quest is an interactive browser-based mental-math game designed for adults.
+
 It features progressive difficulty, levels, stars, player profiles, streak tracking, particle confetti, animations, and a beautiful light/dark theme toggle.
 
 Play it online via GitHub Pages or host it yourself — no backend required.
@@ -109,65 +110,65 @@ Math Quest is a small, modular front-end app built with **vanilla JavaScript**, 
 
 Key Modules
 
-•	index.html
+	•	index.html
 	
 Defines the three main screens:
 
-•	Start screen (sign-in, levels, leaderboard)
+	•	Start screen (sign-in, levels, leaderboard)
 
-•	Game screen (questions, options, timer, streak)
+	•	Game screen (questions, options, timer, streak)
 
-•	Summary screen (stars + stats after each level)
+	•	Summary screen (stars + stats after each level)
 	
 It also wires in all CSS and JS modules in a clear order.
 
 CSS (styles/*.css)
 
-•	base.css – global tokens (colors, radii, typography)
+	•	base.css – global tokens (colors, radii, typography)
 
-•	layout.css – shell, header, and responsive layout
+	•	layout.css – shell, header, and responsive layout
 
-•	cards.css, buttons.css, game.css, levels.css, leaderboard.css, summary.css – component styles
+	•	cards.css, buttons.css, game.css, levels.css, leaderboard.css, summary.css – component styles
 
-•	animations.css – keyframes (shake, timers, confetti, stars)
+	•	animations.css – keyframes (shake, timers, confetti, stars)
 
-•	theme-dark.css, theme-light.css – dark/light mode overrides
+	•	theme-dark.css, theme-light.css – dark/light mode overrides
 
-•	xp.css – XP bar and progress visuals
+	•	xp.css – XP bar and progress visuals
 
 js/storage.js
 
-•	Defines the LEVELS configuration (all levels, operations, ranges, and question counts).
+	•	Defines the LEVELS configuration (all levels, operations, ranges, and question counts).
 
-•	Manages profiles, progress, and leaderboard, persisted in localStorage.
+	•	Manages profiles, progress, and leaderboard, persisted in localStorage.
 
-•	Exposes helpers like loadProgress(), saveProgress(), resetProgress(), and updateLeaderboardForCurrentPlayer().
+	•	Exposes helpers like loadProgress(), saveProgress(), resetProgress(), and updateLeaderboardForCurrentPlayer().
 
 js/engine.js
 
-•	Core game engine: question generation, timers, scoring, streaks, accuracy, stars, and level completion.
+	•	Core game engine: question generation, timers, scoring, streaks, accuracy, stars, and level completion.
 
-•	Controls the flow between questions (askNextQuestion, handleAnswer, handleTimeout, endLevel).
+	•	Controls the flow between questions (askNextQuestion, handleAnswer, handleTimeout, endLevel).
 
 js/renderer.js
 
-•	Handles UI updates: level grid, XP bar, recent players, leaderboard, and screen switching (switchScreen).
+	•	Handles UI updates: level grid, XP bar, recent players, leaderboard, and screen switching (switchScreen).
 
 js/events.js
 
-•	Wires up all user interactions:
+	•	Wires up all user interactions:
 
-•	Start button → create/select player → start level
+	•	Start button → create/select player → start level
 
-•	Danger zone buttons → reset progress / clear players
+	•	Danger zone buttons → reset progress / clear players
 
-•	Summary actions → next level, replay, back to menu
+	•	Summary actions → next level, replay, back to menu
 
-•	Theme toggle → switch between dark and light modes
+	•	Theme toggle → switch between dark and light modes
 
 js/helpers.js
 
-•	Utility functions: random helpers (randInt, shuffleArray), feedback handling, answer highlighting, plus the confetti particle trigger.
+	•	Utility functions: random helpers (randInt, shuffleArray), feedback handling, answer highlighting, plus the confetti particle trigger.
 
 ⸻
 
@@ -175,11 +176,11 @@ Developer Notes
 
 For deeper details on:
 
-•	How to add or change levels
+	•	How to add or change levels
 	
-•	How to add new operations (+, −, ×, ÷, etc.)
+	•	How to add new operations (+, −, ×, ÷, etc.)
 
-•	How to tune difficulty, timers, and star thresholds
+	•	How to tune difficulty, timers, and star thresholds
 
 see:
 
