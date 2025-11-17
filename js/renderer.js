@@ -1,3 +1,8 @@
+// Math Quest – Mental Math Trainer
+// File: js/renderer.js
+// Role: Rendering layer. Updates DOM for screens, levels grid, leaderboard,
+//       recent players, XP bar, and screen switching.
+
 "use strict";
 
 // --- Rendering / UI functions ---
