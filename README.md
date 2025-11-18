@@ -77,7 +77,7 @@ math-quest/
 
 ### Favicon
 
-```
+
 
 The project includes a custom glowing division symbol favicon (`favicon.png`), which appears in the browser tab when running via GitHub Pages or locally.
 
@@ -90,8 +90,6 @@ To change it, replace the file in the project root:
 ```
 
 The favicon is automatically loaded through the `<link rel="icon">` tag inside `index.html`.
-
-```
 
 ⸻
 
@@ -126,16 +124,14 @@ Math Quest is a small, modular front-end app built with **vanilla JavaScript**, 
 
 ```
 
-Key Modules
+### Key Modules
 
 	•	index.html
 	
 Defines the three main screens:
 
 	•	Start screen (sign-in, levels, leaderboard)
-
 	•	Game screen (questions, options, timer, streak)
-
 	•	Summary screen (stars + stats after each level)
 	
 It also wires in all CSS and JS modules in a clear order.
@@ -143,29 +139,21 @@ It also wires in all CSS and JS modules in a clear order.
 CSS (styles/*.css)
 
 	•	base.css – global tokens (colors, radii, typography)
-
 	•	layout.css – shell, header, and responsive layout
-
 	•	cards.css, buttons.css, game.css, levels.css, leaderboard.css, summary.css – component styles
-
 	•	animations.css – keyframes (shake, timers, confetti, stars)
-
 	•	theme-dark.css, theme-light.css – dark/light mode overrides
-
 	•	xp.css – XP bar and progress visuals
 
 js/storage.js
 
 	•	Defines the LEVELS configuration (all levels, operations, ranges, and question counts).
-
 	•	Manages profiles, progress, and leaderboard, persisted in localStorage.
-
 	•	Exposes helpers like loadProgress(), saveProgress(), resetProgress(), and updateLeaderboardForCurrentPlayer().
 
 js/engine.js
 
 	•	Core game engine: question generation, timers, scoring, streaks, accuracy, stars, and level completion.
-
 	•	Controls the flow between questions (askNextQuestion, handleAnswer, handleTimeout, endLevel).
 
 js/renderer.js
@@ -175,13 +163,9 @@ js/renderer.js
 js/events.js
 
 	•	Wires up all user interactions:
-
 	•	Start button → create/select player → start level
-
 	•	Danger zone buttons → reset progress / clear players
-
 	•	Summary actions → next level, replay, back to menu
-
 	•	Theme toggle → switch between dark and light modes
 
 js/helpers.js
@@ -190,14 +174,12 @@ js/helpers.js
 
 ⸻
 
-Developer Notes
+### Developer Notes
 
 For deeper details on:
 
 	•	How to add or change levels
-	
 	•	How to add new operations (+, −, ×, ÷, etc.)
-
 	•	How to tune difficulty, timers, and star thresholds
 
 See the developer documentation here: 
@@ -209,6 +191,7 @@ See the developer documentation here:
 ## 📦 Install & Run Locally
 
 Clone the repository:
+
 git clone https://github.com/MonsterMatt87/math-quest.git
 
 cd math-quest
@@ -245,6 +228,7 @@ Your game is now online!
 ## 🤝 Contributing
 
 Pull requests are welcome!
+
 If you’d like to add features, improve UI, or optimize animations, feel free to open an issue first.
 
 ⸻
