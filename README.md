@@ -75,6 +75,24 @@ math-quest/
 
 ```
 
+### Favicon
+
+```
+
+The project includes a custom glowing division symbol favicon (`favicon.png`), which appears in the browser tab when running via GitHub Pages or locally.
+
+To change it, replace the file in the project root:
+
+```
+
+/favicon.png
+
+```
+
+The favicon is automatically loaded through the `<link rel="icon">` tag inside `index.html`.
+
+```
+
 ⸻
 
 ## 🧱 Architecture Overview
