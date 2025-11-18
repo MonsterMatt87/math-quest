@@ -49,29 +49,31 @@ https://MonsterMatt87.github.io/math-quest/
 
 ```
 math-quest/
-├── index.html
+├── index.html                # Main HTML shell. Defines the app layout, screens, and includes CSS/JS.
+├── README.md                 # Main documentation shown on GitHub. Includes overview, setup, and links.
+├── DEV_NOTES.md              # Developer-only notes: extending levels, adding ops, difficulty tuning.
+├── favicon.png               # Optional site icon (➗ glowing circle) referenced in index.html
 │
-├── styles/
-│   ├── base.css
-│   ├── layout.css
-│   ├── cards.css
-│   ├── buttons.css
-│   ├── levels.css
-│   ├── xp.css
-│   ├── leaderboard.css
-│   ├── game.css
-│   ├── summary.css
-│   ├── animations.css
-│   ├── theme-dark.css
-│   └── theme-light.css
+├── styles/                   # Modular CSS (each file is focused, maintainable, and isolated)
+│   ├── base.css              # Global resets, typography, CSS variables, color tokens
+│   ├── layout.css            # Page layout, shell, header, responsive grid behavior
+│   ├── cards.css             # Card components (start cards, summary card)
+│   ├── buttons.css           # Primary/secondary buttons, danger states, theme icon animations
+│   ├── levels.css            # Level grid, tile styling, lock states, star rendering
+│   ├── xp.css                # XP bar, progress indicators, star totals
+│   ├── leaderboard.css       # Leaderboard list, medals, ranking visuals
+│   ├── game.css              # Game screen UI: question card, options grid, timer, streak
+│   ├── summary.css           # Summary screen: stats grid, 3-star animation, confetti container
+│   ├── animations.css        # Global keyframes (shake, pulse, confetti fall, etc.)
+│   ├── theme-dark.css        # Dark-mode overrides (contrast, backgrounds, text colors)
+│   └── theme-light.css       # Light-mode overrides with readability fixes
 │
-├── js/
-    ├── storage.js
-    ├── helpers.js
-    ├── renderer.js
-    ├── engine.js
-    └── events.js
- 
+├── js/                       # Modular JavaScript (cleanly separated by responsibility)
+│   ├── storage.js            # Persistence layer: profiles, star totals, leaderboard, localStorage
+│   ├── helpers.js            # Utilities: RNG, timers, confetti generator, option helpers, formatting
+│   ├── renderer.js           # All DOM rendering: levels grid, leaderboard, XP bar, screen switching
+│   ├── engine.js             # Core game logic: question generation, scoring, streaks, star rules
+│   └── events.js             # Event wiring: button clicks, theme toggle, game start, replay, menus
 
 ```
 
